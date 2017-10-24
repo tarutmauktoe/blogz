@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1 class="center">Add a Blog Entry</h1>
 
 	<form action="/newpost" method="post">
+		<div class="form-group">
 		<label for="title">Title for your new blog:</label>
-		<input type="text" name="title" value="{{title}}" />
+		<input type="text" name="title" value="{{title}}" class="form-control" />
 		<span class="error">{{title_error}}</span>
-		<br>
-		<br>
+		</div>
+
+		<div class="form-group">
 		<label for="body">Your new blog:</label>
-		<textarea name="body" id="" cols="30" rows="10">{{body}}</textarea>
+		<textarea name="body" id="" cols="50" rows="5">{{body}}</textarea>
 		<span class="error">{{body_error}}</span>
-		<br>
-		<br>
-		<input type="submit" value="Add Entry"/>
+		</div>
+
+		<button type="submit" class="btn btn-default">Add Entry</button>
+
 	</form>
 
 {% endblock %}

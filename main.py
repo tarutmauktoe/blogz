@@ -13,9 +13,9 @@ def blog():
 
     if user_id:
         blogs = db.session.query(Blog).filter(Blog.owner_id == user_id).all()
-        return render_template('blog.html', blogs=blogs)
+        return render_template('blog.html', blogs=blogs, header="Blog Posts")
 
-    return render_template('blog.html', blogs=get_blogs())
+    return render_template('blog.html', blogs=get_blogs(), header="Blog Posts")
 
 @app.route("/newpost", methods=['POST', 'GET'])
 def newpost():
@@ -24,9 +24,9 @@ def newpost():
         body = request.form['body']
 
         if (not title) or (title.strip() == ""):
-            return render_template('newpost.html', body=body, title_error='You must supply a title')
+            return render_template('newpost.html', body=body, title_error='You must supply a title', header="Add a Blog Entry")
         if (not body) or (body.strip() == ""):
-            return render_template('newpost.html', title=title, title_error='You must supply a body')
+            return render_template('newpost.html', title=title, title_error='You must supply a body', header="Add a Blog Entry")
 
         user = User.query.filter_by(username=session['username']).first()
 
@@ -35,7 +35,7 @@ def newpost():
         db.session.commit()
 
         return render_template('blog_detail.html', blog=newpost)
-    return render_template('newpost.html')
+    return render_template('newpost.html', header="Add a Blog Entry")
 
 @app.route("/signup", methods=['POST', 'GET'])
 def signup():
@@ -76,7 +76,7 @@ def signup():
         session['username'] = user.username
         return redirect('/newpost')
 
-    return render_template('signup.html')
+    return render_template('signup.html', header="SignUp")
 
 @app.route("/logout")
 def logout():
@@ -86,7 +86,7 @@ def logout():
 
 @app.route("/")
 def index():
-    return render_template('index.html', users=get_users())
+    return render_template('index.html', users=get_users(), header="Blog Users")
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
@@ -116,7 +116,7 @@ def login():
 
         session['username'] = username
         return redirect('/newpost')
-    return render_template('login.html')
+    return render_template('login.html', header="Login")
 
 @app.before_request
 def require_login():
