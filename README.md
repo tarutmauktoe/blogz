@@ -9,3 +9,14 @@ The purpose of the application is to demo the capabilities of a Flask web applic
 
 # Author
 Jeff T
+
+![Users Screen](Users.png "Users Screen")
+
+
+![Posts Screen](Posts.png "Posts Screen")
+
+
+![Post Screen](Post.png "Post Screen")
+
+
+![Add New Post Screen](AddNewPost.png "Add New Post Screen")
